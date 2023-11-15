@@ -18,7 +18,7 @@ El propósito principal de este clon es aprender sobre la tecnología Astro y su
 ## Instrucciones de Ejecución
 
 1. Clona el repositorio: `git clone https://github.com/Crisops/Spotify-Clone.git`
-2. Ingresa al directorio del proyecto: `cd clon-spotify`
+2. Ingresa al directorio del proyecto: `cd spotify-clone`
 3. Abre el proyecto en tu editor de código favorito.
 4. Ejecuta el proyecto: `npm start`
 
