@@ -1,23 +1,11 @@
 import { useRef, useEffect } from 'react'
 import { usePlayerStore } from '../store/playerStore'
 import CurrentSong from '@/components/react/CurrentSong'
-import { Slider } from './Slider'
-
-export const Pause = () => (
-  <svg
-    role='img' height='16' width='16' aria-hidden='true' viewBox='0 0 16 16'
-  ><path
-    d='M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z'
-  ></path>
-  </svg>
-)
-
-export const Play = () => (
-  <svg role='img' height='16' width='16' aria-hidden='true' viewBox='0 0 16 16'><path d='M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z' /></svg>
-)
+import { Pause, Play } from './Icons'
+import VolumenControl from './VolumenControl'
 
 const Player = () => {
-  const { isPlaying, setIsPlaying, currentMusic } = usePlayerStore(state => state)
+  const { isPlaying, setIsPlaying, currentMusic, volume } = usePlayerStore(state => state)
 
   const audioRef = useRef()
 
@@ -26,10 +14,15 @@ const Player = () => {
   }, [isPlaying])
 
   useEffect(() => {
+    audioRef.current.volume = volume
+  }, [volume])
+
+  useEffect(() => {
     const { song, playlist, songs } = currentMusic
     if (song) {
       const src = `/music/${playlist.id}/0${song.id}.mp3`
       audioRef.current.src = src
+      audioRef.current.value = volume
       audioRef.current.play()
     }
   }, [currentMusic])
@@ -52,16 +45,7 @@ const Player = () => {
           </button>
         </div>
       </div>
-      <Slider
-        defaultValue={[100]}
-        max={100}
-        min={0}
-        className='w-24'
-        onValueChange={(value) => {
-          const [newVolume] = value
-          audioRef.current.volume = newVolume / 100
-        }}
-      />
+      <VolumenControl />
     </div>
   )
 }
