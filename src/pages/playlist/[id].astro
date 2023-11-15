@@ -1,5 +1,7 @@
 ---
-  import Layout from "@/layouts/Layout.astro";
+  import MusicTable from "@/components/MusicTable.astro";
+import CardPlayButton from "@/components/react/CardPlayButton";
+import Layout from "@/layouts/Layout.astro";
 
   import { allPlaylists, playlists, songs } from "@/lib/data";
 
@@ -46,9 +48,17 @@
       </div>
     </header>
 
-    <div class="relative z-10 px-6 pt-10"></div>
+    <div class="relative z-10 px-6 pt-10">
+      <CardPlayButton client:load id={id}/>
+    </div>
     
     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 -z-[1]"></div>
+
+
+    <section class="p-6">
+      <MusicTable songs={playListSong}/>
+    </section>
+
   </div>
 
 </Layout>

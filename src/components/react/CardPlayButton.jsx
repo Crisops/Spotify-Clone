@@ -23,7 +23,7 @@ const CardPlayButton = ({ id }) => {
 
   return (
 
-    <button onClick={handleClick} className='card-play-buttom rounded-full bg-green-500 p-4'>
+    <button onClick={handleClick} className='card-play-buttom transition duration-300 rounded-full bg-green-500 p-4 hover:bg-green-600 hover:scale-105'>
       {isPlayingPlayList ? <Pause /> : <Play />}
     </button>
 
